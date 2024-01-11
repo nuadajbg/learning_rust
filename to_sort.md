@@ -8,6 +8,8 @@
 - Generics 
 - Generics sur les trait (la on est sur de grosse couche d’abstraction ;-) )
 - Vecteur (structure majeure) - julien 
+- async
+- interrupt
 
 
 # ALGORITHMES
