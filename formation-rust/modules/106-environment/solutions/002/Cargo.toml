@@ -1,0 +1,10 @@
+[package]
+# nom du paquet
+name = "cargo_hello"
+# version du paquet
+version = "0.1.0"
+authors = ["Laurent Wouters <lwouters@cenotelie.fr>"]
+# edition du langage à utiliser (2015 par défaut)
+edition = "2021"
+
+[dependencies]

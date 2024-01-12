@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "mymacro",
+    "mymacro_derive",
+    "tester"
+]
