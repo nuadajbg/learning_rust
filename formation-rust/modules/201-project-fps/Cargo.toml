@@ -1,0 +1,9 @@
+[package]
+name = "fps"
+version = "0.1.0"
+authors = ["Laurent Wouters <lwouters@cenotelie.fr>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7"
+gnuplot = "0.0.32"

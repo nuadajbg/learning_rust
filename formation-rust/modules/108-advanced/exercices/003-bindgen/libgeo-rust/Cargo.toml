@@ -1,0 +1,5 @@
+[package]
+name = "libgeo-rust"
+version = "0.1.0"
+authors = ["Laurent Wouters <lwouters@cenotelie.fr>"]
+edition = "2021"
