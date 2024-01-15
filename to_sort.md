@@ -10,6 +10,7 @@
 - Vecteur (structure majeure) - julien 
 - async
 - interrupt
+- compiler en musl
 
 
 # ALGORITHMES
