@@ -189,6 +189,8 @@ let b2 = false;
 let c = a + b1;
 ```
 
+## Types
+
 ```
 jb@d3c07604-2 ep1_akanoa % cargo build
    Compiling ep1_akanoa v0.1.0 (/Users/jb/github/learning_rust/ep1_akanoa)
@@ -254,12 +256,127 @@ et même avec 2 nombres mais pas du même type -> ça ne fonctionne pas parce qu
   |               ^ no implementation for `i32 + u8`
 ```
 
+## Dépassement de taille de nombres
 
-# VARIABLE
+Rust protège contre ça
+(histoire de gandhi sur civilization qui est le plus pacifique et qui quand ça diminue passe à un moment à -1 qui boucle et passe à 255 et de fait devient le plus agressif de la partie)
+
+```
+    let non_signe_8bit : u8 = 256; // 8 bits : 0 -> 255
+```
+
+```
+error: literal out of range for `u8`
+ --> src/main.rs:9:31
+  |
+9 |     let non_signe_8bit : u8 = 256; // 8 bits : 0 -> 255
+  |                               ^^^
+  |
+  = note: the literal `256` does not fit into the type `u8` whose range is `0..=255`
+  = note: `#[deny(overflowing_literals)]` on by default
+```
+
+On est prévenu lorsque l'on essaie de sortir de la zone de représentation
+
+```
+let m :i8 = -128;
+let t = m - 1;
+
+println!("Hello, world! {t}");
+```
+
+```
+15 | let t = m - 1;
+   |         ^^^^^ attempt to compute `i8::MIN - 1_i8`, which would overflow
+```
+
+
+## Caster
+
+```
+    let signe_8bit : i8 = 42; // 8 bits : 0 -> 255
+    let signe_16bit : i16 = -145; // 8 bits : 0 -> 255
+
+let t = signe_8bit + signe_16bit;
+```
+
+```
+12 | let t = signe_8bit + signe_16bit;
+   |                    ^ no implementation for `i8 + i16`
+```
+
+Réponse on caste.
+
+```
+let t = signe_8bit as i16 + signe_16bit;
+println!("Hello, world! {t}");
+```
+
+```
+Hello, world! -103
+```
+
+-> mais possible que parce 8bit rentre dans 16bit.
+sinon
+
+```
+    let signe_8bit : i8 = -42; // 8 bits : 0 -> 255
+    let signe_16bit : i16 = -145; // 8 bits : 0 -> 255
+
+let t = signe_8bit + signe_16bit as i8;
+```
+
+```
+Hello, world! 69
+```
+
+Alors attention parce que si on le débraie, on le débraie et ce que l'on obtient est faux.
+
+
+
+
+# TYPES
 
 let <nom> = <valeur>
 
+## Nombres
+i signé
+u non signé
 
+8, 16, 32, 64, 128
+
+- u8 : non signé 8 bits : 0 -> 255
+- i8 : signé 8 bits : -128 -> 127
+- i16 : signé 16 bits : -256 -> 255
+
+## Booléens
+
+true, false
+
+## Flottants
+
+nombre à virgule - décimaux -> sont signés par défault
+2 types de flottants
+- float : f32 (flottant sur 32 bits) ex: -12.56242342
+- doubles : f64 (précision est double) ex: -12.56242342512525432543542
+
+Attention à la représentation qui peut perdre de la représentation.
+Faire des opération sur les flottants n'est pas une bonne idée.
+Par exemple pour de la trigo c'est pas une bonne idée.
+
+```
+fn main() {
+    let t :f64 = -12.1234523534252345324523452165476787;
+    println!("Hello, world! {t}");
+}
+```
+```
+jb@d3c07604-2 ep1_akanoa % cargo run
+   Compiling ep1_akanoa v0.1.0 (/Users/jb/github/learning_rust/ep1_akanoa)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.23s
+     Running `target/debug/ep1_akanoa`
+Hello, world! -12.123452353425234
+```
 
 
 # FONCTION

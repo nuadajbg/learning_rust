@@ -20,6 +20,17 @@ https://github.com/TheAlgorithms/Rust/blob/master/DIRECTORY.md
 
 # SOURCES
 
+## AKANOA
+
+https://github.com/rust-lang/rustlings/tree/main
+
+https://exercism.org/tracks/rust
+
+https://lafor.ge/ -> rust
+
+Bouquin : Zero to production - pratique pas vraiment dans le langage
+
+
 ## BASTIEN
 
 https://www.youtube.com/@letsgetrusty -> plus complet - A commencer au tout début
