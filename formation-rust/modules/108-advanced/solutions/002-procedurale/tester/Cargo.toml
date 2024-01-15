@@ -1,9 +1,0 @@
-[package]
-name = "exercice_002_tester"
-version = "0.1.0"
-authors = ["Laurent Wouters <lwouters@cenotelie.fr>"]
-edition = "2021"
-
-[dependencies]
-mymacro = { path="../mymacro" }
-mymacro_derive = { path="../mymacro_derive" }
