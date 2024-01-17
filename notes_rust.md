@@ -393,3 +393,24 @@ Identifiable avec le"!"
 
 
 
+# MEMOIRE
+
+https://www.youtube.com/watch?app=desktop&v=qJi1YCUy3nY
+
+Stack
+Heap
+
+Borrow checker
+  - avantage combiné
+  - pas de free manuel
+  - pas de garbage collecteur
+
+importance du contexte d'éxécution pour la suppression des données
+
+On peut :
+ - move -> move dans un autre contexte de la Stack et change le pointeur vers la Heap (mais la première variable de la stack existe encore)
+ - copy/clone -> copie les variables dans la Stacks et la Heap (on double toute la consommation mémoire Stack et Heap)
+
+une variable
+
+
