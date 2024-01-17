@@ -193,6 +193,13 @@ let b2 = false;
 let c = a + b1;
 ```
 
+Rust est un langage "fortement typé" -> ça veut dire qu'il ne peut pas y avoir de changement de type en cours de route. ex en JS ou un String peut être additionné à un chiffre.
+
+F12 dans un navigateur -> console:
+
+>>"abc" + 3
+->"abc3" 
+
 ## Types
 
 ```
@@ -347,7 +354,7 @@ pas d'introspection en rust donc pas de fonction pour savoir le type d'une varia
 un bordel possible, fait par le compilateur lorsqu'il nous dit qu'il ne peut pas additionner tel type avec tel type, avec un "type id" puis va dans une table ...
 -> en fait si ça existe type_name
 
-## Nombres
+## Nombres (primitif)
 i signé
 u non signé
 
@@ -377,11 +384,11 @@ a += 1_u32 as i128;
 
 a est alors un i128
 
-## Booléens
+## Booléens (primitif)
 type bool
 true, false
 
-## Flottants
+## Flottants (primitif)
 
 nombre à virgule - décimaux -> sont signés par défault
 2 types de flottants
@@ -406,7 +413,7 @@ jb@d3c07604-2 ep1_akanoa % cargo run
 Hello, world! -12.123452353425234
 ```
 
-## Chaînes de caractères
+## Chaînes de caractères (primitif)
 
 Chaîne de caractère a un type un peu bizarre "&str"
 plus complexe que ça mais on verra ça plus tard
@@ -473,9 +480,10 @@ on dit ici explicitement que la variable est muable.
 
 intérêt de l'immuabilité par défaut : faire en sorte que les variable soient au max immuables pour éviter par exemple que plusieurs personnes modifient la même variable et est des valeurs différentes. En JS par exemple c'est l'inverse, il faut dire que c'est ummuable.
 
-## Tuple
+## Tuple (composite)
 
-Type composite (avant ce sont des types primitifs sauf le &str)
+Type composite (avant ce sont des types primitifs sauf le &str).
+Compose plusieurs primitifs.
 
 il y a en a plusieurs.
 on se concentre sur les Tuples.
@@ -514,6 +522,7 @@ en rust on peut typer un tuple comme si c'était une variable.
 ```
 
 On peut aussi mettre un tuple dans un tuple (une boite dans une boite)
+et ensuite modifier les éléments avec de l'indexation.
 
 ```
     let my_tuple : (&str, i8, &str, (&str,f32)) = ("plop", 45, "pouet", ("yop", 12.432));
@@ -611,7 +620,10 @@ la premier qui est vrai prends le pas sur les suivantes
     on est dans le if
 ```
 
-# CONDITIONS
+ep2 15:11
+
+
+# BOUCLE
 
 
 
