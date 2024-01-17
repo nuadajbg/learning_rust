@@ -1,9 +1,13 @@
 fn main() {
 
-    let mut my: (&str, i32, f64, bool, (&str, i32))= ("name",42,12.54,false, ("plop",4));
+    let x : i32 = 42;
+    let y : bool = false;
 
-    my.3 = true;
-    my.4.1 = 5;
-
-    println!("Hello, world! {my:?}");
+    if x == 42 {
+        println!("on est dans le if");
+    } else if x < 52 {
+        println!("plop")
+    } else {
+        println!("plop");
+    }
 }
