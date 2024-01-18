@@ -31,6 +31,10 @@ A collection of lints to catch common mistakes and improve your Rust code. Aide 
 bash-3.2$ cargo clippy
 ```
 
+
+-> + installation de rust-analyser pour VScode (dans la marketplace)
+
+
 # CARGO INIT
 
 initialisation projet:
@@ -189,6 +193,13 @@ let b2 = false;
 let c = a + b1;
 ```
 
+Rust est un langage "fortement typé" -> ça veut dire qu'il ne peut pas y avoir de changement de type en cours de route. ex en JS ou un String peut être additionné à un chiffre.
+
+F12 dans un navigateur -> console:
+
+>>"abc" + 3
+->"abc3" 
+
 ## Types
 
 ```
@@ -337,9 +348,13 @@ Alors attention parce que si on le débraie, on le débraie et ce que l'on obtie
 
 # TYPES
 
-let <nom> = <valeur>
+let <nom> : <type> = <valeur>
 
-## Nombres
+pas d'introspection en rust donc pas de fonction pour savoir le type d'une variable.
+un bordel possible, fait par le compilateur lorsqu'il nous dit qu'il ne peut pas additionner tel type avec tel type, avec un "type id" puis va dans une table ...
+-> en fait si ça existe type_name
+
+## Nombres (primitif)
 i signé
 u non signé
 
@@ -349,11 +364,31 @@ u non signé
 - i8 : signé 8 bits : -128 -> 127
 - i16 : signé 16 bits : -256 -> 255
 
-## Booléens
+on peut aussi signer un nombre
 
+```
+let mut a = 23;
+a += 1_u32;
+```
+
+à la première ligne le a est inféré et peut-être un i32
+la seconde ligne impose que le 1 soit un u32 donc a un u32.
+le compilateur sait à ce moment là que a est contraint à être un u32.
+
+on peut s'amuser aussi à caster le a ensuite
+
+```
+let mut a = 23;
+a += 1_u32 as i128;
+```
+
+a est alors un i128
+
+## Booléens (primitif)
+type bool
 true, false
 
-## Flottants
+## Flottants (primitif)
 
 nombre à virgule - décimaux -> sont signés par défault
 2 types de flottants
@@ -377,6 +412,224 @@ jb@d3c07604-2 ep1_akanoa % cargo run
      Running `target/debug/ep1_akanoa`
 Hello, world! -12.123452353425234
 ```
+
+## Chaînes de caractères (primitif)
+
+Chaîne de caractère a un type un peu bizarre "&str"
+plus complexe que ça mais on verra ça plus tard
+
+```
+    let name : &str = "plop";
+```
+
+Autre type "String"
+
+```
+    let lastname = String::from("pouet");
+```
+-> intéressant parce que c'est une manière de gérer les chaines de caractère sans que rust nous embête sur les "référence" - rust nous permettra de faire sans être trop à cheval sur ce que l'on est en train de faire.
+
+
+## Immuabilité / Muabilité des variables
+
+```
+    let a = 1;
+    a +=1 ;
+```
+
+```
+error[E0384]: cannot assign twice to immutable variable `a`
+  --> src/main.rs:22:5
+   |
+21 |     let a = 1;
+   |         -
+   |         |
+   |         first assignment to `a`
+   |         help: consider making this binding mutable: `mut a`
+22 |     a +=1 ;
+   |     ^^^^^ cannot assign twice to immutable variable
+```
+
+-> par défaut on ne peut pas réaffecté une deuxième fois une valeur à a
+
+```
+  let a (-> a là) = 1;
+  let a (-> et ce a là ne sont pas les mêmes)= a (-> ça c'est le premier a) + 1 ;
+```
+
+on peut le montrer dans typant différemment les 2 a et en castant.
+
+```
+    let a : u8 = 1;
+    let a : i8 = (a + 1) as i8 ;
+    Hello, world! 2
+```
+
+le premier a existe toujours en mémoire mais on ne sait plus y accéder.
+comme on est dans la stack -> c'est nettoyé automatiquement lorsque l'on sort du contexte d'éxécution. (voir présentation au sunny tech - https://www.youtube.com/watch?v=qJi1YCUy3nY)
+
+
+```
+    let mut a = 1;
+    a+=1;
+
+    Hello, world! 2
+```
+
+on dit ici explicitement que la variable est muable.
+
+intérêt de l'immuabilité par défaut : faire en sorte que les variable soient au max immuables pour éviter par exemple que plusieurs personnes modifient la même variable et est des valeurs différentes. En JS par exemple c'est l'inverse, il faut dire que c'est ummuable.
+
+## Tuple (composite)
+
+Type composite (avant ce sont des types primitifs sauf le &str).
+Compose plusieurs primitifs.
+
+il y a en a plusieurs.
+on se concentre sur les Tuples.
+
+```
+    let my_tuple = ("plop", 45, "pouet");
+```
+
+```
+7 |     println!("Hello, world! {my_tuple}");
+  |                             ^^^^^^^^^^ `(&str, {integer}, &str)` cannot be formatted with the default formatter
+```
+
+-> le type de notre tuple est &str, {integer}, &str.
+
+-> lorsque l'on est en train de faire le formattage de la chaîne, on peut faire un formattage de débug. c'est fait avec un ":?"
+
+```
+    println!("Hello, world! {my_tuple:?}");
+
+```
+
+
+Il nous livre la représentation de débug du tuple
+```
+Hello, world! ("plop", 45, "pouet")
+```
+
+-> le type de notre tuple est &str, {integer}, &str.
+
+en rust on peut typer un tuple comme si c'était une variable.
+
+```
+    let my_tuple : (&str, i8, &str) = ("plop", 45, "pouet");
+    Hello, world! ("plop", 45, "pouet")
+```
+
+On peut aussi mettre un tuple dans un tuple (une boite dans une boite)
+et ensuite modifier les éléments avec de l'indexation.
+
+```
+    let my_tuple : (&str, i8, &str, (&str,f32)) = ("plop", 45, "pouet", ("yop", 12.432));
+    Hello, world! ("plop", 45, "pouet", ("yop", 12.432))
+```
+
+On peut comme pour toutes les variable retirer la signature pour laisse le compilateur inférer (c'est à dire deviner).
+
+Sauf que l'infèrement en reste :
+- pour les entiers c'est du i32
+- pour les flottant c'est du f64
+
+et donc si on veut choisir il faut signer.
+
+
+```
+    let my_tuple = ("plop", 45, "pouet", ("yop", 12.432));
+    Hello, world! ("plop", 45, "pouet", ("yop", 12.432))
+```
+
+On peut aussi en choisir d'en typer qu'une partie avec un "_"
+
+```
+    let my_tuple : (&str, i8, &str, (&str,_)) = ("plop", 45, "pouet", ("yop", 12.432));
+    Hello, world! ("plop", 45, "pouet", ("yop", 12.432))
+```
+
+Modification du tuple:
+
+```
+    let mut my = ("name",42,12.54,false, ("plop",4));
+
+    my.3 = true;
+    my.4.1 = 5;
+
+    Hello, world! ("name", 42, 12.54, true, ("plop", 5))
+```
+
+# CONDITIONS
+
+## if
+1:43:35 ep1
+
+if <condition> { 
+    <code>;
+    }else if <condition> {
+        <code>;
+    } else {
+        <code>;
+    }
+
+
+la condition doit être un booléen ou le résultat d'une opération qui sort un booléen
+
+if () parenthèse pas nécessaires
+
+```
+    let x: i32 = 42;
+    let y: bool = true;
+
+    if y {
+        println!("on est dans le if");
+    }
+
+    on est dans le if
+```
+
+ou
+
+```
+    let x: i32 = 42;
+    let y: bool = false;
+
+    if y == false {
+        println!("on est dans le if");
+    }
+
+    on est dans le if
+```
+
+la premier qui est vrai prends le pas sur les suivantes
+
+```
+    let x : i32 = 42;
+    let y : bool = false;
+
+    if x == 42 {
+        println!("on est dans le if");
+    } else if x < 52 {
+        println!("plop")
+    } else {
+        println!("plop");
+    }
+
+    on est dans le if
+```
+
+ep2 15:11
+
+
+# BOUCLE
+
+
+
+# STRUCTURE
+
+
 
 
 # FONCTION
