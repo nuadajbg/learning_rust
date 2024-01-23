@@ -1,4 +1,4 @@
-# INSTALLATION
+# <span style="color:blue"> INSTALLATION </span>
 
 C'est un curl qui va télécharger un script puis on éxécute le script.
 
