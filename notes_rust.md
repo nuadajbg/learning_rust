@@ -73,7 +73,9 @@ main.rs : contient la fonction main = point d'entrée de l'application
 
 si on créer un projet binary -> c'est la premier fonction exécutée
 
-# CARGO BUILD
+# CARGO
+
+## CARGO BUILD
 
 Compile
 
@@ -116,7 +118,7 @@ drwxr-xr-x  4 jb  staff     128 14 jan 16:55 deps
 -rw-r--r--  1 jb  staff     123 14 jan 16:55 ep1_akanoa.d
 ```
 
-# CARGO RUN
+## CARGO RUN
 
 Compile et exécute
 
@@ -146,7 +148,7 @@ jb@d3c07604-2 target % cargo run --release
 Hello, world!
 ```
 
-# CARGO CLEAN
+## CARGO CLEAN
 
 Nettoyage du projet
 
@@ -160,6 +162,13 @@ drwxr-xr-x  3 jb  staff   96 14 jan 16:35 src
 ```
 
 -> supprime de répertoire "target"
+
+
+## CARGO WATCH
+
+
+
+
 
 # COMPILATEUR
 
@@ -303,6 +312,18 @@ println!("Hello, world! {t}");
 
 
 ## Caster
+
+Syntaxe:
+
+```
+    let e = 5;
+    e as u8;
+
+    let f = 6 as u8; // marche aussi
+    let f = 6_u8; // marche aussi
+    let f = 6u8; // marche aussi
+
+```
 
 ```
     let signe_8bit : i8 = 42; // 8 bits : 0 -> 255
@@ -563,7 +584,7 @@ Modification du tuple:
 
 # CONDITIONS
 
-## if
+## if / else / else if
 1:43:35 ep1
 
 if <condition> { 
@@ -603,34 +624,212 @@ ou
     on est dans le if
 ```
 
-la premier qui est vrai prends le pas sur les suivantes
+La première qui est vrai prends le pas sur les suivantes
 
 ```
-    let x : i32 = 42;
-    let y : bool = false;
-
-    if x == 42 {
-        println!("on est dans le if");
-    } else if x < 52 {
-        println!("plop")
+    if x > 42 {
+        println!("x strictement supérieur à 42");
+    } else if x < 42 {
+        println!("x strictement inférieur à 42")
     } else {
-        println!("plop");
+        println!("x égale à 0");
     }
 
-    on est dans le if
+x égale à 0
 ```
 
-ep2 15:11
+Le bloc de conditions peut-être affecté à une variable (potetiellement n'existe qu'en RUST)
+Lorsque l'on manipule un bloc en rust -> on manipule en fait un statement 
+-> et lorsque l'on a un statement qui ne se termine pas par un point virgule
+-> le statement va être le retour du bloc qui est analysé
 
+```
+    if x > 42 {
+        println!("x strictement supérieur à 42");
+    } else if x < 42 {
+        println!("x strictement inférieur à 42")
+    } else {
+        println!("x égale à 0");
+    }
+
+    let a :i32 = if y == true {
+        6
+    } else {
+        42
+    };
+
+a vaut 42
+```
+
+L'intéret c'est aussi que l'on peut y mettre plein de logique dedans
+ici on définit la valeur de a à partir de x.
+
+```
+    let a :i32 = if x == 41 && y == false {
+        6
+    } else if x == 42 {
+        let b = 2 * x;
+        b
+    } else {
+        666
+    };
+
+a vaut 84
+
+```
+
+
+dans les conditions on a aussi les AND / OR.
+
+OR : <> || <>
+AND : <> && <> 
+
+```
+    let a :i32 = if y == true || y == false {
+        6
+    } else if x == 42 {
+        42
+    } else {
+        666
+    };
+
+a vaut 6
+
+
+    let a :i32 = if x == 42 && y == false {
+        6
+    } else if x == 42 {
+        42
+    } else {
+        666
+    };
+
+a vaut 6
+```
+
+Attention ici il vaut que les retours soit homogènes.
+Typiquement ça n'est pas possible :
+
+```
+    let a :i32 = if x == 41 && y == false {
+        "plop"
+    } else if x == 42 {
+        let b = 2 * x;
+        b
+    } else {
+        666
+    };
+```
+
+
+# TABLEAU
+
+Syntaxe : let tab [i32; 4] = [2, 4, 17, 19];
+
+
+```
+    let array = [2, 4, 17, 19];
+
+    println!("Le tableau vaut {array:?}");
+    println!("{}",array[2]); 
+
+Le tableau vaut [2, 4, 17, 19]
+17
+```
+
+
+
+On peut itérer dans le tableau avec une boucle.
 
 # BOUCLE
 
+## Loop
+
+syntaxe
+```
+loop {}
+```
+break pour en sortir
+
+```
+    loop {
+        loop{
+            break;
+        }
+        break;
+    }
+```
+
+```
+    loop {
+        println!("counter est {counter}");
+
+        if counter == 0 { 
+            println!("BREAK");
+            break; 
+        } else {
+                counter -= 1;
+            } 
+    }
+
+counter est 3
+counter est 2
+counter est 1
+counter est 0
+BREAK
+```
+
+on peut s'amuser avec des sortie (équivalent aux GOTO)
+
+```
+    'sortie: loop {
+        loop{
+            break 'sortie; // ce break ne sort pas de la boucle imbriquée mais de la boucle principale
+        }
+    }
+```
+
+On peut aussi set une valeur de sortie - ici 2.
+
+```
+    let a = 'sortie: loop {
+        loop{
+            break 'sortie 2
+        }
+    };
+
+    println!("a = {a}");
+
+a = 2
+```
+
+
+## While
+
+```
+  while counter != 0 {
+    println!("counter est {counter}");
+    counter -= 1;
+  };
+
+
+counter est 3
+counter est 2
+counter est 1
+```
 
 
 # STRUCTURE
 
 
+# PRINTLN
 
+```
+    println!("Hello, world!");
+    println!("a vaut {a}");
+    println!("Le tableau vaut {array:?}");
+    println!("{}",array[2]);
+```
 
 # FONCTION
 
