@@ -1,5 +1,5 @@
 fn main() {
-
+/*
     let matrice : [[u8; 2]; 2] = [[2,4],[1,3]];
 
   let array: [i32; 4] = [2, 4, 17, 19];
@@ -29,4 +29,20 @@ while iteration < size {
    // println!("{}",array[2]);
    // println!("La matrice vaut {matrice:?}");
    // println!("{}",matrice[1.1]);
+ */
+
+struct Person {
+  nom : &'static str,
+  prenom : &'static str,
+  age : u8
+}
+
+let bob : Person = Person {
+  nom : "Dupont", 
+  prenom : "Gérard", 
+  age : 56};
+
+
+01:18:24
+
 }

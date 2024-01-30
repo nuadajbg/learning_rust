@@ -816,6 +816,50 @@ counter est 1
 
 # <span style="color:red"> STRUCTURE
 
+Assez vieux en programmation.
+Un peu comme un tuple mais on accède aux champs en utilisant le nom du champ plutôt que la position ou le numéro.
+
+
+Tuple - pénible, il faut se souvenir de la position.
+
+
+```
+// person.0 = nom
+// person.1 = prenom
+// person.2 = age
+
+ let mut person : (&str, &str, u8) = ("michel", "dupont", 34);
+
+ println!("Tuple :  {person:?}");
+
+ person.1 = "NOM";
+
+ println!("Tuple :  {person:?}");
+
+```
+
+Structure
+
+mettre une majuscule c'est la convention.
+
+
+```
+
+struct Person {
+  nom : &'static str,
+  prenom : &'static str,
+  age : u8
+}
+
+// on set un objet "bob" de type struc Person
+
+let bob : Person = Person {
+  nom : "Dupont", 
+  prenom : "Gérard", 
+  age : 56};
+
+```
+
 
 
 # <span style="color:red"> PRINTLN
