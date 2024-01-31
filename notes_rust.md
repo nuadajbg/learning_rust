@@ -806,6 +806,11 @@ a = 2
 
 ## While
 
+sucre syntaxique sur la base d'une loop.
+-> donc on peut aussi utiliser un break dans un while
+
+while true {} est équivalent à loop {}
+
 ```
   while counter != 0 {
     println!("counter est {counter}");
@@ -818,8 +823,33 @@ counter est 2
 counter est 1
 ```
 
+## For
+
+sucre syntaxique sur la base d'un while.
+
+syntaxe :
+
+```
+for value in array {
+  println!("value for : {value}")
+}
+
+
+value for : 2
+value for : 4
+value for : 17
+value for : 19
+```
 
 # STRUCTURE
+01:07:00
+ep2 
+
+
+comme un tuple dont on utiliserait le nom du champs pour y accéder.
+
+
+
 
 
 # PRINTLN

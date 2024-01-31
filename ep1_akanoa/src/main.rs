@@ -25,8 +25,20 @@ while iteration < size {
 
 }
 
+for value in array {
+  println!("value for : {value}")
+}
+
+
    // println!("Le tableau vaut {array:?}");
    // println!("{}",array[2]);
    // println!("La matrice vaut {matrice:?}");
    // println!("{}",matrice[1.1]);
+
+
+let person : (&str, &str, u8) = ("nom", "prenom", 32);
+
+println!("nom : ", {person.1});
+
+
 }
