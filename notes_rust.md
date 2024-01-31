@@ -1,4 +1,5 @@
-# <span style="color:blue"> INSTALLATION </span>
+# <span style="color:red"> INSTALLATION
+
 
 C'est un curl qui va télécharger un script puis on éxécute le script.
 
@@ -35,7 +36,7 @@ bash-3.2$ cargo clippy
 -> + installation de rust-analyser pour VScode (dans la marketplace)
 
 
-# CARGO INIT
+# <span style="color:red"> CARGO INIT
 
 initialisation projet:
 
@@ -53,7 +54,7 @@ drwxr-xr-x  4 jb  staff  128 14 jan 16:35 .
 drwxr-xr-x  3 jb  staff   96 14 jan 16:35 src
 ```
 
-## cargo.toml
+## <span style="color:blue"> cargo.toml
 -> MD associées à un projet Rust
 
 avec le nom du package (ici ep1_akanoa)
@@ -63,19 +64,19 @@ edition pourquoi ?
 -> permet de gérer les évolutions du langage
 -> rétrio compatibilité complète
 
-## .gitingnore
+## <span style="color:blue"> .gitingnore
 
 classique d'intégration d'éléments que nous ne souhaitons pas verisonner
 
-## src
+## <span style="color:blue"> src
 
 main.rs : contient la fonction main = point d'entrée de l'application
 
 si on créer un projet binary -> c'est la premier fonction exécutée
 
-# CARGO
+# <span style="color:red"> CARGO
 
-## CARGO BUILD
+## <span style="color:blue"> CARGO BUILD
 
 Compile
 
@@ -118,7 +119,7 @@ drwxr-xr-x  4 jb  staff     128 14 jan 16:55 deps
 -rw-r--r--  1 jb  staff     123 14 jan 16:55 ep1_akanoa.d
 ```
 
-## CARGO RUN
+## <span style="color:blue"> CARGO RUN
 
 Compile et exécute
 
@@ -148,7 +149,7 @@ jb@d3c07604-2 target % cargo run --release
 Hello, world!
 ```
 
-## CARGO CLEAN
+## <span style="color:blue"> CARGO CLEAN
 
 Nettoyage du projet
 
@@ -164,13 +165,7 @@ drwxr-xr-x  3 jb  staff   96 14 jan 16:35 src
 -> supprime de répertoire "target"
 
 
-## CARGO WATCH
-
-
-
-
-
-# COMPILATEUR
+# <span style="color:red"> COMPILATEUR
 
 But : présenter les erreurs de la façon la plus précise
 
@@ -209,7 +204,7 @@ F12 dans un navigateur -> console:
 >>"abc" + 3
 ->"abc3" 
 
-## Types
+## <span style="color:blue"> Types
 
 ```
 jb@d3c07604-2 ep1_akanoa % cargo build
@@ -276,7 +271,7 @@ et même avec 2 nombres mais pas du même type -> ça ne fonctionne pas parce qu
   |               ^ no implementation for `i32 + u8`
 ```
 
-## Dépassement de taille de nombres
+## <span style="color:blue"> Dépassement de taille de nombres
 
 Rust protège contre ça
 (histoire de gandhi sur civilization qui est le plus pacifique et qui quand ça diminue passe à un moment à -1 qui boucle et passe à 255 et de fait devient le plus agressif de la partie)
@@ -311,7 +306,7 @@ println!("Hello, world! {t}");
 ```
 
 
-## Caster
+## <span style="color:blue"> Caster
 
 Syntaxe:
 
@@ -367,7 +362,7 @@ Alors attention parce que si on le débraie, on le débraie et ce que l'on obtie
 
 
 
-# TYPES
+# <span style="color:red"> TYPES
 
 let <nom> : <type> = <valeur>
 
@@ -375,7 +370,7 @@ pas d'introspection en rust donc pas de fonction pour savoir le type d'une varia
 un bordel possible, fait par le compilateur lorsqu'il nous dit qu'il ne peut pas additionner tel type avec tel type, avec un "type id" puis va dans une table ...
 -> en fait si ça existe type_name
 
-## Nombres (primitif)
+## <span style="color:blue"> Nombres (primitif)
 i signé
 u non signé
 
@@ -405,11 +400,11 @@ a += 1_u32 as i128;
 
 a est alors un i128
 
-## Booléens (primitif)
-type bool
-true, false
+## <span style="color:blue"> Booléens (primitif)
 
-## Flottants (primitif)
+type bool true, false
+
+## <span style="color:blue"> Flottants (primitif)
 
 nombre à virgule - décimaux -> sont signés par défault
 2 types de flottants
@@ -434,7 +429,7 @@ jb@d3c07604-2 ep1_akanoa % cargo run
 Hello, world! -12.123452353425234
 ```
 
-## Chaînes de caractères (primitif)
+## <span style="color:blue"> Chaînes de caractères (primitif)
 
 Chaîne de caractère a un type un peu bizarre "&str"
 plus complexe que ça mais on verra ça plus tard
@@ -451,7 +446,7 @@ Autre type "String"
 -> intéressant parce que c'est une manière de gérer les chaines de caractère sans que rust nous embête sur les "référence" - rust nous permettra de faire sans être trop à cheval sur ce que l'on est en train de faire.
 
 
-## Immuabilité / Muabilité des variables
+## <span style="color:blue"> Immuabilité / Muabilité des variables
 
 ```
     let a = 1;
@@ -501,7 +496,7 @@ on dit ici explicitement que la variable est muable.
 
 intérêt de l'immuabilité par défaut : faire en sorte que les variable soient au max immuables pour éviter par exemple que plusieurs personnes modifient la même variable et est des valeurs différentes. En JS par exemple c'est l'inverse, il faut dire que c'est ummuable.
 
-## Tuple (composite)
+## <span style="color:blue"> Tuple (composite)
 
 Type composite (avant ce sont des types primitifs sauf le &str).
 Compose plusieurs primitifs.
@@ -582,9 +577,9 @@ Modification du tuple:
     Hello, world! ("name", 42, 12.54, true, ("plop", 5))
 ```
 
-# CONDITIONS
+# <span style="color:red"> CONDITIONS
 
-## if / else / else if
+## <span style="color:blue"> if / else / else if
 1:43:35 ep1
 
 if <condition> { 
@@ -722,7 +717,7 @@ Typiquement ça n'est pas possible :
 ```
 
 
-# TABLEAU
+# <span style="color:red"> TABLEAU
 
 Syntaxe : let tab [i32; 4] = [2, 4, 17, 19];
 
@@ -741,9 +736,9 @@ Le tableau vaut [2, 4, 17, 19]
 
 On peut itérer dans le tableau avec une boucle.
 
-# BOUCLE
+# <span style="color:red"> BOUCLE
 
-## Loop
+## <span style="color:blue"> Loop
 
 syntaxe
 ```
@@ -804,7 +799,7 @@ a = 2
 ```
 
 
-## While
+## <span style="color:blue"> While
 
 sucre syntaxique sur la base d'une loop.
 -> donc on peut aussi utiliser un break dans un while
@@ -841,18 +836,56 @@ value for : 17
 value for : 19
 ```
 
-# STRUCTURE
-01:07:00
-ep2 
+
+# <span style="color:red"> STRUCTURE
+
+Assez vieux en programmation.
+Un peu comme un tuple mais on accède aux champs en utilisant le nom du champ plutôt que la position ou le numéro.
 
 
-comme un tuple dont on utiliserait le nom du champs pour y accéder.
+Tuple - pénible, il faut se souvenir de la position.
+
+
+```
+// person.0 = nom
+// person.1 = prenom
+// person.2 = age
+
+ let mut person : (&str, &str, u8) = ("michel", "dupont", 34);
+
+ println!("Tuple :  {person:?}");
+
+ person.1 = "NOM";
+
+ println!("Tuple :  {person:?}");
+
+```
+
+Structure
+
+mettre une majuscule c'est la convention.
+
+
+```
+
+struct Person {
+  nom : &'static str,
+  prenom : &'static str,
+  age : u8
+}
+
+// on set un objet "bob" de type struc Person
+
+let bob : Person = Person {
+  nom : "Dupont", 
+  prenom : "Gérard", 
+  age : 56};
+
+```
 
 
 
-
-
-# PRINTLN
+# <span style="color:red"> PRINTLN
 
 ```
     println!("Hello, world!");
@@ -861,12 +894,12 @@ comme un tuple dont on utiliserait le nom du champs pour y accéder.
     println!("{}",array[2]);
 ```
 
-# FONCTION
+# <span style="color:red"> FONCTION
 
 déclaration : fn
 fn <name_fonction> (<paramètres>) {}
 
-# MACRO
+# <span style="color:red"> MACRO
 
     println!("Hello, world!");
 
@@ -875,7 +908,7 @@ Identifiable avec le"!"
 
 
 
-# MEMOIRE
+# <span style="color:red"> MEMOIRE
 
 https://www.youtube.com/watch?app=desktop&v=qJi1YCUy3nY
 

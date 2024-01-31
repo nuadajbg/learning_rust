@@ -1,5 +1,5 @@
 fn main() {
-
+/*
     let matrice : [[u8; 2]; 2] = [[2,4],[1,3]];
 
   let array: [i32; 4] = [2, 4, 17, 19];
@@ -34,11 +34,18 @@ for value in array {
    // println!("{}",array[2]);
    // println!("La matrice vaut {matrice:?}");
    // println!("{}",matrice[1.1]);
+*/
+   struct Person {
+  nom : &'static str,
+  prenom : &'static str,
+  age : u8
+}
 
+// on set un objet "bob" de type struc Person
 
-let person : (&str, &str, u8) = ("nom", "prenom", 32);
-
-println!("nom : ", {person.1});
-
+let bob : Person = Person {
+  nom : "Dupont", 
+  prenom : "Gérard", 
+  age : 56};
 
 }
