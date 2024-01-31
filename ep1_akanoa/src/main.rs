@@ -34,8 +34,10 @@ for value in array {
    // println!("{}",array[2]);
    // println!("La matrice vaut {matrice:?}");
    // println!("{}",matrice[1.1]);
+
 */
-   struct Person {
+
+struct Person {
   nom : &'static str,
   prenom : &'static str,
   age : u8
@@ -46,6 +48,7 @@ for value in array {
 let bob : Person = Person {
   nom : "Dupont", 
   prenom : "Gérard", 
-  age : 56};
+  account_name : 5};
+
 
 }

@@ -204,6 +204,30 @@ F12 dans un navigateur -> console:
 >>"abc" + 3
 ->"abc3" 
 
+
+# <span style="color:red"> SCOPE
+
+
+  ```
+    let x = 5;
+
+  let x = x + 1;
+
+  {
+      let x = x * 2;
+      println!("The value of x in the inner scope is: {x}");
+  }
+
+  println!("The value of x is: {x}");
+
+  ```
+
+  ```
+The value of x in the inner scope is: 12
+The value of x is: 6
+  ```
+
+
 ## <span style="color:blue"> Types
 
 ```
@@ -818,7 +842,7 @@ counter est 2
 counter est 1
 ```
 
-## For
+## <span style="color:blue"> For
 
 sucre syntaxique sur la base d'un while.
 
