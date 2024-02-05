@@ -38,17 +38,37 @@ for value in array {
 */
 
 struct Person {
-  nom : &'static str,
-  prenom : &'static str,
-  age : u8
+  nom: &'static str,
+  prenom: &'static str,
+  age: u8,
+  adresse: Adresse,
 }
 
-// on set un objet "bob" de type struc Person
+struct Adresse {
+  ville : &'static str,
+  code_postal: u32,
+}
 
-let bob : Person = Person {
-  nom : "Dupont", 
-  prenom : "Gérard", 
-  account_name : 5};
+let adress = Adresse {
+  ville : "Paris",
+  code_postal : 75020,
+};
+
+let mut alice = Person {
+  nom : "Dupont",
+  prenom : "alice",
+  age: 9,
+  adresse : adress,
+};
+
+alice.age = alice.age + 1;
+
+alice.adresse.ville="Brest";
+
+
+println!("Age de alice: {}", alice.age);
+println!("Ville de alice: {}", alice.adresse.ville);
+
 
 
 }
