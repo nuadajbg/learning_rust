@@ -1098,6 +1098,101 @@ déclaration : fn
 fn name_fonction (paramètres) {}
 
 
+```
+fn main() {
+    hello()
+}
+
+fn hello (){
+    println!("Hello")
+}
+```
+
+Pour intégrer un retour on ajoute dans la signature de la foncion "-> type"
+
+Cet fonction hello reverra un i32.
+Donc si on essaie de renvoyer autre chose, ça ne passera pas.
+
+
+## <span style="color:blue"> Return
+
+```
+fn main() {
+  let a = hello();
+  println!("{a}");
+}
+
+fn hello () -> i32{
+  println!("Hello");
+  return 4;
+}
+
+
+Hello
+4
+```
+
+On peut aussi faire:
+
+```
+fn main() {
+  let a = hello();
+  println!("{a}");
+}
+
+fn hello () -> i32{
+  println!("Hello");
+  4
+}
+```
+
+## <span style="color:blue"> Parameter
+
+```
+fn main() {
+  let a = hello(4);
+  println!("{a}");
+}
+
+fn hello (param1:i32) -> i32{
+  println!("Hello");
+  param1 +1 
+}
+```
+
+```
+fn main() {
+  let data1 = Data{
+    a:3,
+  };
+
+  let a = hello(data1);
+  println!("Hello {}", a.a);
+}
+
+struct Data {
+  a :i32
+}
+
+fn hello (mut param1 : Data) -> Data{
+  println!("Hello");
+  param1.a=4;
+  param1 
+}
+
+Hello
+Hello 4
+``` 
+-> ici on fait bien attention de sortir la struct Data de la fonction "main" sinon elle n'est pas visible de la fonction Hello.
+
+ep2 21:00
+
+
+# <span style="color:red"> REFERENCE
+
+Au sens de Rust + règles qui régissent les références.
+
+
 
 # <span style="color:red"> MACRO
 

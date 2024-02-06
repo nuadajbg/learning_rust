@@ -1,4 +1,4 @@
-fn main() {
+
 /*
     let matrice : [[u8; 2]; 2] = [[2,4],[1,3]];
 
@@ -35,7 +35,7 @@ for value in array {
    // println!("La matrice vaut {matrice:?}");
    // println!("{}",matrice[1.1]);
 
-*/
+
 
 struct Person {
   nom: &'static str,
@@ -68,7 +68,23 @@ alice.adresse.ville="Brest";
 
 println!("Age de alice: {}", alice.age);
 println!("Ville de alice: {}", alice.adresse.ville);
+*/
 
+fn main() {
+  let data1 = Data{
+    a:3,
+  };
 
+  let a = hello(data1);
+  println!("Hello {}", a.a);
+}
 
+struct Data {
+  a :i32
+}
+
+fn hello (mut param1 : Data) -> Data{
+  println!("Hello");
+  param1.a=4;
+  param1 
 }
