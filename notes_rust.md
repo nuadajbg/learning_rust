@@ -604,14 +604,13 @@ Modification du tuple:
 # <span style="color:red"> CONDITIONS
 
 ## <span style="color:blue"> if / else / else if
-1:43:35 ep1
 
-if <condition> { 
-    <code>;
-    }else if <condition> {
-        <code>;
+if condition { 
+    code;
+    }else if condition {
+        code;
     } else {
-        <code>;
+        code;
     }
 
 
@@ -895,7 +894,7 @@ mettre une majuscule c'est la convention.
 struct Person {
   nom : &'static str,
   prenom : &'static str,
-  age : u8
+  account_name : u8
 }
 
 // on set un objet "bob" de type struc Person
@@ -903,9 +902,182 @@ struct Person {
 let bob : Person = Person {
   nom : "Dupont", 
   prenom : "Gérard", 
-  age : 56};
+  account_name : 5
+};
+
+print!("Person.nom: {} \n", bob.nom);
 
 ```
+
+```
+Person.nom: Dupont
+```
+
+Rust fait de la programmation orienté objet - plus rigoureux : c'est de la programmation par aspect.
+Manque l'héritage par exemple ou les constructeur ou destructeur.
+
+On a juste une structure à laquelle on vient greffer des comportements.
+
+Person est un type.
+On intégrer un tuple dedans par exemple.
+
+
+
+```
+struct Person {
+  nom: &'static str,
+  prenom: &'static str,
+  age: u8,
+  adresse: Adresse,
+}
+
+struct Adresse {
+  ville : &'static str,
+  code_postal: u32,
+}
+
+let bob : Person = Person {
+  nom : "Dupont",
+  prenom : "Bob",
+  age: 9,
+  adresse : Adresse {
+    ville : "Paris",
+    code_postal : 75020,
+  }
+};
+
+println!("Ville de bob: {}", bob.adresse.ville)
+
+```
+
+```
+Ville de bob: Paris
+```
+
+Tout les champs sont privés par défaut
+
+
+On peut aussi extraire l'adresse
+
+```
+struct Person {
+  nom: &'static str,
+  prenom: &'static str,
+  age: u8,
+  adresse: Adresse,
+}
+
+struct Adresse {
+  ville : &'static str,
+  code_postal: u32,
+}
+
+let adress : Adresse = Adresse {
+  ville : "Paris",
+  code_postal : 75020,
+};
+
+let bob : Person = Person {
+  nom : "Dupont",
+  prenom : "Bob",
+  age: 9,
+  adresse : adress,
+};
+
+println!("Ville de bob: {}", bob.adresse.ville)
+```
+
+On peut aussi faire:
+
+```
+let adress : Adresse = Adresse {
+  ville : "Paris",
+  code_postal : 75020,
+};
+
+let bob : Person = Person {
+  nom : "Dupont",
+  prenom : "Bob",
+  age: 9,
+  adresse
+};
+
+```
+mais uniquement parce la variable (derrière le let) a le même nom que le champ de la structure.
+Ne marche pas avec ça par exemple:
+
+```
+let adress2 : Adresse = Adresse {
+  ville : "Paris",
+  code_postal : 75020,
+};
+
+let bob : Person = Person {
+  nom : "Dupont",
+  prenom : "Bob",
+  age: 9,
+  adresse ; adress2
+};
+```
+
+le nom de la variable "adress2" n'est pas égal au champs de la structure "adress"
+
+
+On peut aussi faire
+
+```
+
+let adress = Adresse {
+  ville : "Paris",
+  code_postal : 75020,
+};
+
+let bob = Person {
+  nom : "Dupont",
+  prenom : "Bob",
+  age: 9,
+  adresse : adress,
+};
+```
+-> on est pas obligé d'explicité le type Adresse ou Person, on en a qu'un défini par la structure - il n'y a pas d'ambiguité
+
+
+
+On peut muter
+```
+
+let adress : Adresse = Adresse {
+  ville : "Paris",
+  code_postal : 75020,
+};
+
+let mut alice : Person = Person {
+  nom : "Dupont",
+  prenom : "alice",
+  age: 9,
+  adresse : adress,
+};
+
+alice.age = alice.age + 1;
+
+alice.adresse.ville="Brest";
+
+
+println!("Age de alice: {}", alice.age);
+println!("Ville de alice: {}", alice.adresse.ville);
+
+```
+
+```
+Age de alice: 10
+Ville de alice: Brest
+```
+
+-> on peut muter l'âge
+-> ce qui peut paraître étonnant c'est que l'on peut aussi muter la ville.
+
+En fait le compilateur copie/colle complètement la variable adress dans la variable Person 
+
 
 
 
@@ -916,12 +1088,111 @@ let bob : Person = Person {
     println!("a vaut {a}");
     println!("Le tableau vaut {array:?}");
     println!("{}",array[2]);
+    print!("Person.nom: {} \n", bob.nom);
 ```
 
 # <span style="color:red"> FONCTION
 
 déclaration : fn
-fn <name_fonction> (<paramètres>) {}
+
+fn name_fonction (paramètres) {}
+
+
+```
+fn main() {
+    hello()
+}
+
+fn hello (){
+    println!("Hello")
+}
+```
+
+Pour intégrer un retour on ajoute dans la signature de la foncion "-> type"
+
+Cet fonction hello reverra un i32.
+Donc si on essaie de renvoyer autre chose, ça ne passera pas.
+
+
+## <span style="color:blue"> Return
+
+```
+fn main() {
+  let a = hello();
+  println!("{a}");
+}
+
+fn hello () -> i32{
+  println!("Hello");
+  return 4;
+}
+
+
+Hello
+4
+```
+
+On peut aussi faire:
+
+```
+fn main() {
+  let a = hello();
+  println!("{a}");
+}
+
+fn hello () -> i32{
+  println!("Hello");
+  4
+}
+```
+
+## <span style="color:blue"> Parameter
+
+```
+fn main() {
+  let a = hello(4);
+  println!("{a}");
+}
+
+fn hello (param1:i32) -> i32{
+  println!("Hello");
+  param1 +1 
+}
+```
+
+```
+fn main() {
+  let data1 = Data{
+    a:3,
+  };
+
+  let a = hello(data1);
+  println!("Hello {}", a.a);
+}
+
+struct Data {
+  a :i32
+}
+
+fn hello (mut param1 : Data) -> Data{
+  println!("Hello");
+  param1.a=4;
+  param1 
+}
+
+Hello
+Hello 4
+``` 
+-> ici on fait bien attention de sortir la struct Data de la fonction "main" sinon elle n'est pas visible de la fonction Hello.
+
+ep2 21:00
+
+
+# <span style="color:red"> REFERENCE
+
+Au sens de Rust + règles qui régissent les références.
+
+
 
 # <span style="color:red"> MACRO
 
